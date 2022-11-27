@@ -23,11 +23,12 @@ const CartProductCard = ({cartProduct, onRemoveClick}) => {
                 <img
                     className="w-full h-full object-cover"
                     src={product.images[0].thumbnail}
+                    alt={`Thumbnail of ${product.name}`}
                 />
             </div>
 
             <div className="flex-1 text-dark-grayish-blue">
-                <h2>{cartProduct.product.name}</h2>
+                <h2>{product.name}</h2>
 
                 <p>
                     {formattedPrice}{' '}

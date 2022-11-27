@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 
 import { Icons } from '../Icons'
 
@@ -7,36 +7,34 @@ const GalleryThumbnail = ({image, isSelected, onClick}) => (
         className={`w-20 h-20 rounded-lg overflow-hidden transition-all border-2 hover:opacity-60 ${isSelected ? ' border-orange' : 'border-transparent'}`}
         role="button"
         onClick={onClick}
+        aria-label="Select image"
         >
             <img
                 className={`w-full h-full object-cover transition-all ${isSelected ? 'opacity-40' : ''}`}
                 src={image}
+                alt="Product thumbnail"
             />
     </div>
 )
 
-const GalleryNavigationButton = ({children, onClick}) => (
+const GalleryNavigationButton = ({icon, onClick}) => (
     <button
         onClick={onClick}
-        className="flex justify-center items-center bg-white rounded-full w-14 h-14 md:w-10 md:h-10"
+        className="pointer-events-auto flex justify-center items-center bg-white rounded-full w-14 h-14 md:w-10 md:h-10"
         >
-            { children }
+            <Icons icon={icon} height="12" width="8" />
     </button>
 )
 
-const GalleryNavigationControls = ({showControls, onNextClick, onPreviousClick}) => (
-    <div className={`${showControls ? '' : 'md:hidden' } absolute inset-4 md:-inset-5 flex items-center justify-between`}>
-        <GalleryNavigationButton onClick={onPreviousClick}>
-            <Icons icon="previous" height="12" width="8" />
-        </GalleryNavigationButton>
+const GalleryNavigationControls = ({onLightbox, onNextClick, onPreviousClick}) => (
+    <div className={`${onLightbox ? '-left-6 md:-left-4 -right-6 md:-right-4' : 'md:hidden'} pointer-events-none flex justify-between absolute top-1/2 -translate-y-1/2 left-4 right-4 `}>
+        <GalleryNavigationButton icon="previous" onClick={onPreviousClick} />
 
-        <GalleryNavigationButton onClick={onNextClick}>
-            <Icons icon="next" height="12" width="8" />
-        </GalleryNavigationButton>
+        <GalleryNavigationButton icon="next" onClick={onNextClick} />
     </div>
 )
 
-export const Gallery = ({images, onMainImageClick, showControls}) => {
+export const Gallery = ({images, onMainImageClick, onLightbox}) => {
     const [selectedIndex, setSelectedIndex] = useState(0)
 
     const showNextImage = event => {
@@ -59,16 +57,24 @@ export const Gallery = ({images, onMainImageClick, showControls}) => {
 
     return (
         <div>
-            <div className="relative" role="button" onClick={onMainImageClick}>
-                <img
-                    className="w-full md:rounded-xl"
-                    src={images[selectedIndex].image}
-                />
+            <div className="relative">
+                <button
+                    className="w-full"
+                    disabled={!onMainImageClick}
+                    aria-label="Open gallery lightbox"
+                    onClick={() => onMainImageClick(selectedIndex)}
+                    >
+                        <img
+                            className={`w-full md:rounded-xl ${onLightbox ? 'rounded-xl' : ''}`}
+                            src={images[selectedIndex].image}
+                            alt="Selected product image on gallery"
+                        />
+                </button>
 
                 <GalleryNavigationControls
                     onNextClick={showNextImage}
                     onPreviousClick={showPreviousImage}
-                    showControls={showControls}
+                    onLightbox={onLightbox}
                 />
             </div>
 

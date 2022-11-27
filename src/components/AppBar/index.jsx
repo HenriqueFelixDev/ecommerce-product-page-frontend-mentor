@@ -82,7 +82,7 @@ export const AppBar = () => {
     const hideMenu = () => setShowMenu(false)
 
     return (
-        <header>
+        <header className="sticky top-0 z-10 bg-white">
             <div className="flex items-center gap-4 md:gap-10 px-4 h-24 max-w-4xl container">
                 <button
                     className="md:hidden"

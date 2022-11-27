@@ -16,7 +16,7 @@ const AddToCartButton = ({disabled, onClick}) => (
 const QuantityCounter = ({quantity, onIncrement, onDecrement}) => (
   <div className="flex justify-between items-center gap-8">
     <button
-      className="px-4 text-orange"
+      className="h-6 px-4 text-orange"
       aria-label="Decrement product quantity"
       onClick={onDecrement}
       >
@@ -28,7 +28,7 @@ const QuantityCounter = ({quantity, onIncrement, onDecrement}) => (
     </p>
 
     <button
-      className="px-4 text-orange"
+      className="h-6 px-4 text-orange"
       aria-label="Increment product quantity"
       onClick={onIncrement}
       >

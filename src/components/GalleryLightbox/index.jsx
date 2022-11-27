@@ -12,7 +12,7 @@ export const GalleryLightbox = ({images, onCloseClick}) => (
                     <Icons icon="close" />
             </button>
             
-            <Gallery images={images} showControls={true} />
+            <Gallery images={images} onLightbox={true} />
         </div>
     </div>
 )
