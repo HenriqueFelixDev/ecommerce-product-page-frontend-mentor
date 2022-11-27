@@ -27,7 +27,7 @@ const GalleryNavigationButton = ({icon, onClick}) => (
 )
 
 const GalleryNavigationControls = ({onLightbox, onNextClick, onPreviousClick}) => (
-    <div className={`${onLightbox ? '-left-7 md:-left-5 -right-7 md:-right-5' : 'md:hidden'} pointer-events-none flex justify-between absolute top-1/2 -translate-y-1/2 left-4 right-4 `}>
+    <div className={`${onLightbox ? '-left-7 md:-left-5 -right-7 md:-right-5' : 'md:hidden'} pointer-events-none flex justify-between absolute top-1/2 -translate-y-1/2`}>
         <GalleryNavigationButton icon="previous" onClick={onPreviousClick} />
 
         <GalleryNavigationButton icon="next" onClick={onNextClick} />
